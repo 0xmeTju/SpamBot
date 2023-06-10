@@ -1,6 +1,6 @@
 # Spambot
 
-Simple spambot made by meTju in python.
+Simple spambot made by meTju in python. Gimme a star on github: https://github.com/I-meTju-I
 
 ## Installation
 
