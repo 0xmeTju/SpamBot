@@ -7,20 +7,24 @@ import keyboard
 import random
 import pyperclip
 import os
+import sys
 
 #Default interval between messages 
 interval = 0.1
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def send(msg,delay):
     pyautogui.typewrite(msg,delay)
     pyautogui.press('enter')
 
 def menu():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(''' ___  ____   __    __  __  ____  _____  ____ 
+    clear_screen()
+    print('''\033[92m ___  ____   __    __  __  ____  _____  ____ 
 / __)(  _ \ /__\  (  \/  )(  _ \(  _  )(_  _)
 \__ \ )___//(__)\  )    (  ) _ < )(_)(   )(  
-(___/(__) (__)(__)(_/\/\_)(____/(_____) (__) by meTju''')
+(___/(__) (__)(__)(_/\/\_)(____/(_____) (__) by meTju\033[0m''')
     print('''DISCLAIMER: When you choose the spam option, an 8-second timer starts. Move your cursor to the appropriate chat box. 
 Pause spamming anytime by holding the 'ESC' key. More info in README.\n''')
     print("\nChoose your option:")
@@ -56,14 +60,14 @@ def settings():
 
     if change == "y":
         print("Enter the new interval: ",end="")
-        interval = float(input())
+        interval = input_option(float)
         print("Interval changed to: ", interval)
         time.sleep(1)
 
-def input_option():
+def input_option(data_type=int):
     while True:
         try:
-            option = int(input())
+            option = data_type(input())
             return option
         except ValueError:
             print("Invalid option...")
@@ -71,7 +75,7 @@ def input_option():
             menu()
             continue
 
-#Main
+#Main function
 menu()
 option = input_option()
 count = 0
@@ -90,13 +94,15 @@ while option != 5:
         spam([message])
 
     elif option == 3:
+        script_dir = os.path.dirname(__file__)
+        file_path = os.path.join(script_dir, 'message.txt')
         try:
-            with open("message.txt","r",encoding='utf-8') as file:
+            with open(file_path,"r",encoding='utf-8') as file:
                 buffer = file.readlines()
                 buffer = [msg.strip() for msg in buffer]
                 if buffer:
                     print("Spamming from file in 8 seconds. Switch to the chat box")
-                    time.sleep(3)
+                    time.sleep(8)
                     spam(buffer)
                 else:
                     print("File is empty...")
@@ -121,3 +127,5 @@ while option != 5:
 
 print("Exiting...")
 time.sleep(0.5)
+clear_screen()
+sys.exit()
