@@ -2,7 +2,8 @@
 
 Simple spambot made by meTju in python. Gimme a star on github: https://github.com/I-meTju-I
 
-## Installation
+<font size = 5> [DOWNLOAD](https://github.com/I-meTju-I/SpamBot/archive/refs/tags/v1.0.0.zip)
+## Installation </font>
 
 Use the package manager pip to install requirements before starting script.
 
